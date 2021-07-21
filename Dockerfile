@@ -80,9 +80,9 @@ RUN set -eux \
 
 ## 安裝docker CLI
 RUN set -x \
-   && echo "######### install docker CLI ##########" \
+  && echo "######### install docker CLI ##########" \
   && apt-get update \
-  && apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release \
+  && apt-get install --assume-yes apt-transport-https ca-certificates curl gnupg lsb-release \
   && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
   && echo \
   "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
@@ -92,7 +92,12 @@ RUN set -x \
 
 ## 新增user 並給予docker CLI 權限
 ARG USERNAME
-RUN useradd -m -G sudo,root -u 1001 -s /bin/bash ${USERNAME} \
+RUN set -x \
+  && echo "######### useradd ${USERNAME} ##########" \
+  && apt-get update \
+  && apt install --assume-yes sudo \
+  && rm -rf /var/lib/apt/lists/* && apt-get clean \
+  && useradd -m -G sudo,root -u 1001 -s /bin/bash ${USERNAME} \
   && echo "${USERNAME} ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 ENTRYPOINT ["/usr/bin/supervisord","-c","/etc/supervisor/conf.d/supervisord.conf"]
