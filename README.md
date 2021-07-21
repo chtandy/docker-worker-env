@@ -21,6 +21,20 @@
       #!/bin/bash
       source ~/.bashrc
       ```
+- 使用ssh config
+  - touch ~/.ssh/config
+  - 內容為
+```
+Host docker
+   User {USERNAME}
+   Hostname localhost
+   ForwardAgent yes
+   AddKeysToAgent yes
+   IdentitiesOnly yes
+   IdentityFile {USERNAME private key path}
+   Port 1022
+```
+
 - .bash_profile 內容
 ```
 # ~/.bashrc: executed by bash(1) for non-login shells.
