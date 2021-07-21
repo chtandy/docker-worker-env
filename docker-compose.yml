@@ -45,7 +45,7 @@ services:
         USERNAME: ${USERNAME}
     container_name: ubuntu
     hostname: docker-ubuntu
-    restart: unless-stopped
+    restart: always
     environment:
       DOCKER_CERT_PATH: /certs/client
       DOCKER_HOST: tcp://docker:2376
