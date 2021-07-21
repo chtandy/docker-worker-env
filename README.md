@@ -9,12 +9,12 @@
 
 
 ### 優化
-- 新增.bashrc ,將以下內容加入
-  - run `docker exec -u ${USERNAME} -i ubuntu touch ~/.bashrc`
-  - vim `data/${USERNAME}/.bashrc`
-  - run `docker exec -u ${USERNAME} -i ubuntu chmod +x  ~/.bashrc`
+- 新增.bash_profile ,將以下內容加入
+  - run `docker exec -u ${USERNAME} -i ubuntu touch ~/.bash_profile`
+  - vim `data/${USERNAME}/.bash_profile`
+  - run `docker exec -u ${USERNAME} -i ubuntu chmod +x  ~/.bash_profile`
 
-- .bashrc 內容
+- .bash_profile 內容
 ```
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
