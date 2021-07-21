@@ -29,11 +29,9 @@ services:
     image: busybox:latest
     entrypoint: ["/bin/sh", "-c"]
     command: |
-      - "chown -R 1001:1001 /home/${USERNAME} &&
-         chown 1001:1001 /data"
+      - "chown  1001:1001 /home/${USERNAME}"
     volumes:
       - ./data/${USERNAME}:/home/${USERNAME}
-      - ./data/data:/data
     restart: 'no'
 
   ubuntu:
@@ -53,7 +51,6 @@ services:
     volumes:
       - ./data/certs/certs-client:/certs/client:ro
       - ./data/${USERNAME}:/home/${USERNAME}
-      - ./data/data:/data
     ports:
       - "${SSH_PORT}:22"
     depends_on:
