@@ -27,16 +27,19 @@ services:
 
   init:
     image: busybox:latest
-    command: "chown -R 1001 /data/${USERNAME}"
+    entrypoint: ["/bin/sh", "-c"]
+    command: |
+      - "chown -R 1001:1001 /home/${USERNAME} &&
+         chown 1001:1001 /data"
     volumes:
-      - ./data/${USERNAME}:/data/${USERNAME}
+      - ./data/${USERNAME}:/home/${USERNAME}
+      - ./data/data:/data
     restart: 'no'
 
   ubuntu:
     image: ubuntu:latest
     build:
       context: ./
-      #dockerfile: Dockerfile
       args:
         ANSIBLE_VERSION: ${ANSIBLE_VERSION}
         USERNAME: ${USERNAME}
@@ -50,6 +53,7 @@ services:
     volumes:
       - ./data/certs/certs-client:/certs/client:ro
       - ./data/${USERNAME}:/home/${USERNAME}
+      - ./data/data:/data
     ports:
       - "${SSH_PORT}:22"
     logging:
