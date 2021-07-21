@@ -12,7 +12,6 @@
 - 新增.bash_profile ,將以下內容加入
   - run `docker exec -u ${USERNAME} -i ubuntu touch ~/.bash_profile`
   - vim `data/${USERNAME}/.bash_profile`
-  - run `docker exec -u ${USERNAME} -i ubuntu chmod +x  ~/.bash_profile`
   - 選項：
     - 或是新增.bashrc, .bash_profile
     - 將內容加入到.bashrc
