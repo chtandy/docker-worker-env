@@ -15,7 +15,7 @@
   - run `docker exec -u ${USERNAME} -i ubuntu chmod +x  ~/.bash_profile`
   - 選項：
     - 或是新增.bashrc, .bash_profile
-    - 將內容嫁入到.bashrc
+    - 將內容加入到.bashrc
     - .bash_profile 內容為
       ```
       #!/bin/bash
