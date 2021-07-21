@@ -1,0 +1,64 @@
+version: '3'
+networks:
+  docker-network:
+    driver: bridge
+
+services:
+  dockerd:
+    image: docker:stable-dind
+    container_name: dockerd
+    hostname: dockerd
+    restart: always
+    privileged: true
+    environment:
+      DOCKER_TLS_CERTDIR: /certs
+    volumes:
+      - ./data/certs/certs-ca:/certs/ca
+      - ./data/certs/certs-client:/certs/client
+    networks:
+      docker-network:
+        aliases:
+          - docker
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  init:
+    image: busybox:latest
+    command: "chown -R 1001 /data/${USERNAME}"
+    volumes:
+      - ./data/${USERNAME}:/data/${USERNAME}
+    restart: 'no'
+
+  ubuntu:
+    image: ubuntu:latest
+    build:
+      context: ./
+      #dockerfile: Dockerfile
+      args:
+        ANSIBLE_VERSION: ${ANSIBLE_VERSION}
+        USERNAME: ${USERNAME}
+    container_name: ubuntu
+    hostname: docker-ubuntu
+    restart: unless-stopped
+    environment:
+      DOCKER_CERT_PATH: /certs/client
+      DOCKER_HOST: tcp://docker:2376
+      DOCKER_TLS_VERIFY: 1
+    volumes:
+      - ./data/certs/certs-client:/certs/client:ro
+      - ./data/${USERNAME}:/home/${USERNAME}
+    ports:
+      - "${SSH_PORT}:22"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    depends_on:
+      - init
+      - dockerd
+    networks:
+      - docker-network
