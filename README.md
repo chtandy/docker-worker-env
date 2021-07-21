@@ -10,6 +10,8 @@
 
 ### 優化
 - 新增.bashrc ,將以下內容加入
+  - run `docker exec -u ${USERNAME} -i ubuntu touch ~/.bashrc`
+  - vim `data/${USERNAME}/.bashrc`
 ```
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
