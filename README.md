@@ -13,7 +13,14 @@
   - run `docker exec -u ${USERNAME} -i ubuntu touch ~/.bash_profile`
   - vim `data/${USERNAME}/.bash_profile`
   - run `docker exec -u ${USERNAME} -i ubuntu chmod +x  ~/.bash_profile`
-
+  - 選項：
+    - 或是新增.bashrc, .bash_profile
+    - 將內容嫁入到.bashrc
+    - .bash_profile 內容為
+      ```
+      #!/bin/bash
+      source ~/.bashrc
+      ```
 - .bash_profile 內容
 ```
 # ~/.bashrc: executed by bash(1) for non-login shells.
