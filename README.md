@@ -5,4 +5,4 @@
 - vim data/${USERNAME}/.ssh/authorized_keys
 - add current public key into data/${USERNAME}/.ssh/authorized_keys
 - run `docker-compose up -d`
-- ssh -i {ssh key} -p 1022 ${USERNAME}＠localhost
+- ssh -i {ssh key} -p 1022 ${USERNAME}@localhost
