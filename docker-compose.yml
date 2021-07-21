@@ -56,13 +56,13 @@ services:
       - ./data/data:/data
     ports:
       - "${SSH_PORT}:22"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "5"
     depends_on:
       - init
       - dockerd
     networks:
       - docker-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
