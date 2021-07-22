@@ -79,7 +79,7 @@ RUN set -eux \
   && rm -rf /var/lib/apt/lists/* && apt-get clean
 
 ## 安裝docker CLI
-RUN set -x \
+RUN set -ex \
   && echo "######### install docker CLI ##########" \
   && apt-get update \
   && apt-get install --assume-yes apt-transport-https ca-certificates curl gnupg lsb-release \
@@ -92,7 +92,7 @@ RUN set -x \
 
 ## 新增user 並給予docker CLI 權限
 ARG USERNAME
-RUN set -x \
+RUN set -ex \
   && echo "######### useradd ${USERNAME} ##########" \
   && apt-get update \
   && apt install --assume-yes sudo \
