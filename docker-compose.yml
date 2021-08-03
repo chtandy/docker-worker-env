@@ -51,6 +51,8 @@ services:
     volumes:
       - ./data/certs/certs-client:/certs/client:ro
       - ./data/${USERNAME}:/home/${USERNAME}
+    user: ${USERNAME} 
+    working_dir: /home/${USERNAME} 
     ports:
       - "${SSH_PORT}:22"
     depends_on:
